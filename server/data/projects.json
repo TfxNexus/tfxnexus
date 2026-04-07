@@ -234,6 +234,21 @@
     "characterImage": null
   },
   {
+    "id": "PersonalDiscordBot",
+    "title": "Personal Discord Bot",
+    "description": "A Discord bot built with Node.js and Discord.js to manage server tasks.",
+    "category": "Personal Projects",
+    "subcategory": "Full Stack",
+    "techStack": ["Node.js", "Discord.js"],
+    "repoUrl": "https://github.com/nexus-discord-bot",
+    "liveUrl": null,
+    "imageUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80",
+    "bgImage": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80",
+    "themeColor": "#8B5CF6",
+    "stats": null,
+    "characterImage": null
+  },
+  {
     "id": "web-dev",
     "title": "Web Development",
     "description": "Building modern, responsive web apps with React, Tailwind, and full-stack patterns.",
