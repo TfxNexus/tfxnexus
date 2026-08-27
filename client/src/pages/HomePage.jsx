@@ -1,111 +1,44 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useInView } from 'framer-motion'
+import { Cake, MapPin, GraduationCap, Music, Video, Globe2 } from 'lucide-react'
 import { useFetch } from '../hooks/useFetch'
 import { API_BASE } from '../lib/apiBase'
 import { LoadingSpinner } from '../components/LoadingSpinner'
 import { ErrorMessage } from '../components/ErrorMessage'
+import { ScrollProgress } from '../components/ScrollProgress'
 
-// Bangkok panorama images for the moving hero background
-const bangkokImages = [
-  'https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=1600&q=80',
-  'https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=1600&q=80',
-  'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=1600&q=80',
+const sections = [
+  { id: 'hero', label: 'Intro' },
+  { id: 'facts', label: 'Quick facts' },
+  { id: 'origin', label: 'My story' },
+  { id: 'developer', label: 'Who I am' },
+  { id: 'rmit', label: 'Scholarship' },
+  { id: 'gaming', label: 'Beyond the code' },
+  { id: 'next', label: "What's next" },
 ]
-
-function MovingHeroBg() {
-  const [idx, setIdx] = useState(0)
-  useEffect(() => {
-    const t = setInterval(() => setIdx(p => (p + 1) % bangkokImages.length), 5000)
-    return () => clearInterval(t)
-  }, [])
-  return (
-    <div className="absolute inset-0 overflow-hidden">
-      {bangkokImages.map((url, i) => (
-        <motion.div
-          key={i}
-          className="absolute inset-0"
-          initial={false}
-          animate={{
-            opacity: i === idx ? 1 : 0,
-            x: i === idx ? '0%' : i < idx ? '-8%' : '8%',
-          }}
-          transition={{ duration: 1.2, ease: 'easeInOut' }}
-        >
-          <img src={url} alt="Bangkok" className="w-full h-full object-cover" />
-        </motion.div>
-      ))}
-      {/* Heavy blur + dark overlay so text is readable */}
-      <div className="absolute inset-0 backdrop-blur-sm bg-gray-900/75" />
-    </div>
-  )
-}
-
-const rmitSlides = [
-  { url: 'https://images.unsplash.com/photo-1562774053-701939374585?w=1200&q=80', caption: 'University life at RMIT' },
-  { url: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&q=80', caption: 'Pursuing excellence' },
-  { url: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1200&q=80', caption: 'Building the future' },
-]
-
-function Carousel() {
-  const [current, setCurrent] = useState(0)
-  useEffect(() => {
-    const t = setInterval(() => setCurrent(p => (p + 1) % rmitSlides.length), 3500)
-    return () => clearInterval(t)
-  }, [])
-  return (
-    <div className="relative w-full h-64 sm:h-80 rounded-2xl overflow-hidden shadow-2xl shadow-purple-900/30">
-      {rmitSlides.map((slide, i) => (
-        <motion.div key={i} initial={false}
-          animate={{ opacity: i === current ? 1 : 0, scale: i === current ? 1 : 1.05 }}
-          transition={{ duration: 0.8, ease: 'easeInOut' }}
-          className="absolute inset-0"
-        >
-          <img src={slide.url} alt={slide.caption} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent" />
-          <p className="absolute bottom-3 left-4 text-xs text-gray-300 font-medium">{slide.caption}</p>
-        </motion.div>
-      ))}
-      <div className="absolute bottom-3 right-4 flex gap-1.5">
-        {rmitSlides.map((_, i) => (
-          <button key={i} onClick={() => setCurrent(i)}
-            className={`h-1.5 rounded-full transition-all duration-300 ${i === current ? 'bg-purple-400 w-4' : 'bg-gray-500 w-1.5'}`} />
-        ))}
-      </div>
-    </div>
-  )
-}
 
 function SlideSection({ children, fromRight = false, delay = 0 }) {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const inView = useInView(ref, { once: false, margin: '-15% 0px -15% 0px' })
   return (
     <motion.div ref={ref}
-      initial={{ opacity: 0, x: fromRight ? 60 : -60 }}
-      animate={inView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.65, delay, ease: 'easeOut' }}
+      initial={{ opacity: 0, x: fromRight ? 40 : -40 }}
+      animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: fromRight ? 40 : -40 }}
+      transition={{ duration: 0.5, delay: inView ? delay : 0, ease: 'easeOut' }}
     >
       {children}
     </motion.div>
   )
 }
 
-function SectionImg({ src, alt }) {
-  return (
-    <div className="relative rounded-2xl overflow-hidden h-60 shadow-xl shadow-purple-900/20">
-      <img src={src} alt={alt} className="w-full h-full object-cover" />
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 to-transparent" />
-    </div>
-  )
-}
-
 const quickFacts = [
-  { icon: '🎂', label: 'Born', value: 'May 24, 2006' },
-  { icon: '🇹🇭', label: 'Birthplace', value: 'Bangkok, Thailand' },
-  { icon: '🇻🇳', label: 'Based in', value: 'Vietnam (since 2020)' },
-  { icon: '🎓', label: 'University', value: 'RMIT — 50% Scholarship' },
-  { icon: '🎵', label: 'osu! Rank', value: '#3,022 Global' },
-  { icon: '▶️', label: 'YouTube', value: '1.4K Subscribers' },
+  { Icon: Cake, label: 'Born', value: 'May 24, 2006' },
+  { Icon: Globe2, label: 'Birthplace', value: 'Bangkok, Thailand' },
+  { Icon: MapPin, label: 'Based in', value: 'Vietnam (since 2020)' },
+  { Icon: GraduationCap, label: 'University', value: 'RMIT — 50% Scholarship' },
+  { Icon: Music, label: 'osu! Rank', value: '#3,022 Global' },
+  { Icon: Video, label: 'YouTube', value: '1.4K Subscribers' },
 ]
 
 export function HomePage() {
@@ -116,96 +49,136 @@ export function HomePage() {
 
   return (
     <div className="relative">
+      <ScrollProgress sections={sections} />
 
-      {/* ── Hero with moving Bangkok background ── */}
-      <section className="relative overflow-hidden rounded-b-3xl mb-16">
-        <MovingHeroBg />
-        <div className="relative z-10 px-4 sm:px-8 py-24 sm:py-32">
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}>
-            <p className="text-purple-400 font-medium text-sm tracking-widest uppercase mb-3">Hi, I'm</p>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4">
+      {/* Hero */}
+      <section
+        id="hero"
+        className="relative overflow-hidden mb-16 border-b"
+        style={{ borderColor: 'var(--border-hairline)' }}
+      >
+        <div className="relative z-10 px-4 sm:px-8 py-20 sm:py-28">
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}>
+            <p className="font-mono-label text-xs mb-3" style={{ color: 'var(--accent-dev)' }}>
+              {'// hi, im'}
+            </p>
+            <h1
+              className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-4"
+              style={{ color: 'var(--text-primary)' }}
+            >
               {profile.name}
             </h1>
-            <p className="text-xl sm:text-2xl text-gray-300 mb-6">{profile.tagline}</p>
-            <p className="text-gray-300 text-base sm:text-lg leading-relaxed max-w-xl mb-10">{profile.bio}</p>
-            <div className="flex flex-wrap gap-3">
-              <Link to="/projects"
-                className="px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-lg font-medium text-sm transition-colors shadow-lg shadow-purple-900/40">
-                View Projects
+            <p className="text-xl sm:text-2xl mb-6" style={{ color: 'var(--text-secondary)' }}>
+              {profile.tagline}
+            </p>
+            <p
+              className="text-base sm:text-lg leading-relaxed max-w-xl mb-10"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              {profile.bio}
+            </p>
+            <div className="flex flex-wrap gap-3 font-mono-label text-xs">
+              <Link
+                to="/projects"
+                className="px-5 py-3 rounded-sm font-medium transition-colors"
+                style={{ background: 'var(--accent-dev)', color: '#0B0B0F' }}
+              >
+                View projects
               </Link>
-              <Link to="/resume"
-                className="px-6 py-3 border border-gray-500 hover:border-purple-500 text-gray-300 hover:text-white rounded-lg font-medium text-sm transition-colors">
-                View Resume
+              <Link
+                to="/resume"
+                className="px-5 py-3 rounded-sm border transition-colors"
+                style={{ borderColor: 'var(--border-hairline-strong)', color: 'var(--text-secondary)' }}
+              >
+                View resume
               </Link>
-              <Link to="/history"
-                className="px-6 py-3 border border-gray-700 hover:border-purple-600/50 text-gray-400 hover:text-white rounded-lg font-medium text-sm transition-colors">
-                My History
+              <Link
+                to="/history"
+                className="px-5 py-3 rounded-sm border transition-colors"
+                style={{ borderColor: 'var(--border-hairline)', color: 'var(--text-muted)' }}
+              >
+                My history
               </Link>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* ── Quick facts bordered cards ── */}
-      <section className="px-4 sm:px-0 mb-20">
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-          {quickFacts.map(({ icon, label, value }, i) => (
+      {/* Quick facts — spec-sheet style */}
+      <section id="facts" className="px-4 sm:px-0 mb-20">
+        <div
+          className="grid grid-cols-2 sm:grid-cols-3 gap-px"
+          style={{ background: 'var(--border-hairline)', border: '1px solid var(--border-hairline)' }}
+        >
+          {quickFacts.map(({ Icon, label, value }, i) => (
             <motion.div key={label}
-              initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.07, duration: 0.35 }}
-              className="bg-gray-800/60 border border-gray-700/60 rounded-xl px-4 py-3
-                         hover:border-purple-600/40 transition-colors"
+              initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.05, duration: 0.3 }}
+              className="px-4 py-4"
+              style={{ background: 'var(--bg-raised)' }}
             >
-              <div className="flex items-center gap-2 mb-1">
-                <span>{icon}</span>
-                <span className="text-gray-500 text-xs">{label}</span>
+              <div className="flex items-center gap-2 mb-1.5">
+                <Icon size={14} style={{ color: 'var(--accent-dev)' }} strokeWidth={1.75} />
+                <span className="font-mono-label text-xs" style={{ color: 'var(--text-muted)' }}>{label}</span>
               </div>
-              <p className="text-white text-sm font-semibold">{value}</p>
+              <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>{value}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
-      <div className="h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent mb-20" />
-
-      {/* ── Story sections ── */}
+      {/* Story sections */}
       <div className="space-y-24 px-4 sm:px-0 pb-24">
 
-        {/* 1: Origin — text left, image right */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        {/* 1: Origin */}
+        <div id="origin" className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <SlideSection fromRight={false}>
-            <p className="text-purple-400 text-xs font-semibold tracking-widest uppercase mb-2">My Story</p>
-            <h2 className="text-3xl font-bold text-white mb-4">Born in Bangkok, raised in Vietnam</h2>
-            <p className="text-gray-400 leading-relaxed mb-3">
+            <p className="font-mono-label text-xs mb-2" style={{ color: 'var(--accent-dev)' }}>My story</p>
+            <h2 className="text-3xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+              Born in Bangkok, raised in Vietnam
+            </h2>
+            <p className="leading-relaxed mb-3" style={{ color: 'var(--text-secondary)' }}>
               I was born on May 24, 2006 in Bangkok, Thailand to Vietnamese parents, both holding
               American passports. I attended Lertlah Kaset Nawamin School in Bangkok during my early
               years, where I first discovered my love for technology and games.
             </p>
-            <p className="text-gray-400 leading-relaxed">
+            <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
               In 2020, my family moved to Vietnam, where I've been building my life and career ever since.
               That multicultural background shapes how I think and how I build things for people.
             </p>
-            <div className="flex flex-wrap gap-2 mt-4">
-              <span className="px-3 py-1 bg-gray-800 border border-gray-700 rounded-full text-xs text-gray-300">🇹🇭 Born in Bangkok</span>
-              <span className="px-3 py-1 bg-gray-800 border border-gray-700 rounded-full text-xs text-gray-300">🇻🇳 Based in Vietnam</span>
-              <span className="px-3 py-1 bg-gray-800 border border-gray-700 rounded-full text-xs text-gray-300">🇺🇸 American Passport</span>
+            <div className="flex flex-wrap gap-2 mt-4 font-mono-label text-xs">
+              <span className="px-3 py-1 border rounded-sm" style={{ borderColor: 'var(--border-hairline-strong)', color: 'var(--text-secondary)' }}>Bangkok born</span>
+              <span className="px-3 py-1 border rounded-sm" style={{ borderColor: 'var(--border-hairline-strong)', color: 'var(--text-secondary)' }}>Vietnam based</span>
+              <span className="px-3 py-1 border rounded-sm" style={{ borderColor: 'var(--border-hairline-strong)', color: 'var(--text-secondary)' }}>US passport</span>
             </div>
           </SlideSection>
-          <SlideSection fromRight={true} delay={0.1}>
-            <SectionImg src="https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=800&q=80" alt="Bangkok" />
+          <SlideSection fromRight={true} delay={0.05}>
+            <div
+              className="h-60 rounded-sm border flex items-center justify-center font-mono-label text-xs"
+              style={{ borderColor: 'var(--border-hairline)', background: 'var(--bg-raised)', color: 'var(--text-muted)' }}
+            >
+              [ your photo here ]
+            </div>
           </SlideSection>
         </div>
 
-        {/* 2: Developer — image left, text right */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          <SlideSection fromRight={false} delay={0.05}>
-            <SectionImg src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80" alt="Developer at work" />
+        {/* 2: Developer */}
+        <div id="developer" className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+          <SlideSection fromRight={false}>
+            <div
+              className="h-60 rounded-sm border flex items-center justify-center font-mono-label text-xs"
+              style={{ borderColor: 'var(--border-hairline)', background: 'var(--bg-raised)', color: 'var(--text-muted)' }}
+            >
+              [ project screenshot here ]
+            </div>
           </SlideSection>
           <SlideSection fromRight={true}>
-            <p className="text-purple-400 text-xs font-semibold tracking-widest uppercase mb-2">Who I Am</p>
-            <h2 className="text-3xl font-bold text-white mb-4">A developer with a passion for craft</h2>
-            <p className="text-gray-400 leading-relaxed">
+            <p className="font-mono-label text-xs mb-2" style={{ color: 'var(--accent-dev)' }}>Who I am</p>
+            <h2 className="text-3xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+              A developer with a passion for craft
+            </h2>
+            <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
               I started coding because I wanted to build things that felt alive. From my first HTML page
               to full-stack React apps, every project has been a step toward mastering the craft of
               software development. I care deeply about clean code, good design, and building things
@@ -214,64 +187,102 @@ export function HomePage() {
           </SlideSection>
         </div>
 
-        {/* 3: RMIT — text left, carousel right */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        {/* 3: RMIT */}
+        <div id="rmit" className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <SlideSection fromRight={false}>
-            <p className="text-purple-400 text-xs font-semibold tracking-widest uppercase mb-2">Academic Achievement</p>
-            <h2 className="text-3xl font-bold text-white mb-4">50% RMIT Scholarship</h2>
-            <p className="text-gray-400 leading-relaxed mb-4">
+            <p className="font-mono-label text-xs mb-2" style={{ color: 'var(--accent-dev)' }}>Academic achievement</p>
+            <h2 className="text-3xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+              50% RMIT scholarship
+            </h2>
+            <p className="leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
               Earning a 50% merit scholarship at RMIT University is one of the achievements I'm most
               proud of. It represents not just academic performance, but the recognition that hard work
               and dedication genuinely pay off.
             </p>
-            <p className="text-gray-400 leading-relaxed">
-              This scholarship motivates me every day to push further, learn deeper, and give back
-              through the quality of work I produce.
-            </p>
-            <div className="mt-5 inline-flex items-center gap-2 px-4 py-2 bg-purple-900/40 border border-purple-700/50 rounded-lg">
-              <span className="text-purple-300 text-2xl font-bold">50%</span>
-              <span className="text-gray-400 text-sm">Merit Scholarship, RMIT University</span>
+            <div
+              className="mt-5 inline-flex items-center gap-3 px-4 py-2 rounded-sm border"
+              style={{ borderColor: 'var(--accent-dev-dim)', background: 'var(--bg-raised)' }}
+            >
+              <span className="text-2xl font-bold" style={{ color: 'var(--accent-dev)' }}>50%</span>
+              <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>Merit scholarship, RMIT University</span>
             </div>
           </SlideSection>
           <SlideSection fromRight={true} delay={0.05}>
-            <Carousel />
+            <div
+              className="h-60 rounded-sm border flex items-center justify-center font-mono-label text-xs"
+              style={{ borderColor: 'var(--border-hairline)', background: 'var(--bg-raised)', color: 'var(--text-muted)' }}
+            >
+              [ RMIT photo/carousel here ]
+            </div>
           </SlideSection>
         </div>
 
-        {/* 4: Gaming — image left, text right */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          <SlideSection fromRight={false} delay={0.05}>
-            <SectionImg src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80" alt="Gaming setup" />
-          </SlideSection>
-          <SlideSection fromRight={true}>
-            <p className="text-purple-400 text-xs font-semibold tracking-widest uppercase mb-2">Beyond the Code</p>
-            <h2 className="text-3xl font-bold text-white mb-4">Gaming sharpens my thinking</h2>
-            <p className="text-gray-400 leading-relaxed">
-              Games like osu!, Valorant, and Fortnite aren't just hobbies. They've trained my
-              reaction time, strategic thinking, and ability to stay calm under pressure. The same
-              focus I bring to a ranked match is the same focus I bring to debugging a tricky problem
-              at 2am.
-            </p>
-          </SlideSection>
-        </div>
-
-        {/* 5: What's next — text left, image right */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        {/* 4: Gaming — distinct register */}
+        <div id="gaming">
           <SlideSection fromRight={false}>
-            <p className="text-purple-400 text-xs font-semibold tracking-widest uppercase mb-2">What's Next</p>
-            <h2 className="text-3xl font-bold text-white mb-4">Building toward something real</h2>
-            <p className="text-gray-400 leading-relaxed mb-6">
+          <div
+            className="relative panel-clip halftone-bg p-8 sm:p-10 border"
+            style={{ background: 'var(--accent-game-bg)', borderColor: 'var(--accent-game-border)' }}
+          >
+            <div
+              className="absolute top-0 left-0 w-16 h-1"
+              style={{ background: 'var(--accent-game)' }}
+            />
+            <p className="font-mono-label text-xs mb-2" style={{ color: 'var(--accent-game)' }}>Beyond the code</p>
+            <h2
+              className="text-3xl sm:text-4xl font-bold italic mb-4"
+              style={{ color: '#FFFFFF', textShadow: '2px 2px 0 var(--accent-game)' }}
+            >
+              Gaming sharpens my thinking
+            </h2>
+            <p className="leading-relaxed mb-6 max-w-2xl" style={{ color: '#C7A9AF' }}>
+              osu!, Valorant, and Fortnite aren't just hobbies. They've trained my reaction time,
+              strategic thinking, and ability to stay calm under pressure, the same focus I bring to
+              debugging a tricky problem at 2am. Full live stats are on the{' '}
+              <Link to="/projects" style={{ color: 'var(--accent-game)' }}>projects page</Link>.
+            </p>
+            <div className="flex flex-wrap gap-2 font-mono-label text-xs">
+              {['osu!', 'Valorant', 'Fortnite'].map(tag => (
+                <span
+                  key={tag}
+                  className="panel-clip-sm px-3 py-1"
+                  style={{ background: 'var(--accent-game)', color: '#4A1B0C' }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+          </SlideSection>
+        </div>
+
+        {/* 5: What's next */}
+        <div id="next" className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+          <SlideSection fromRight={false}>
+            <p className="font-mono-label text-xs mb-2" style={{ color: 'var(--accent-dev)' }}>What's next</p>
+            <h2 className="text-3xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+              Building toward something real
+            </h2>
+            <p className="leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
               I'm actively looking for opportunities to grow as a developer, whether through
               internships, collaborative projects, or open source contributions. I want to work on
               things that matter and with people who care about quality.
             </p>
-            <Link to="/projects"
-              className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 font-medium text-sm transition-colors">
-              See my work <span>→</span>
+            <Link
+              to="/projects"
+              className="inline-flex items-center gap-2 font-mono-label text-xs transition-colors"
+              style={{ color: 'var(--accent-dev)' }}
+            >
+              See my work →
             </Link>
           </SlideSection>
-          <SlideSection fromRight={true} delay={0.1}>
-            <SectionImg src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80" alt="Team collaboration" />
+          <SlideSection fromRight={true} delay={0.05}>
+            <div
+              className="h-60 rounded-sm border flex items-center justify-center font-mono-label text-xs"
+              style={{ borderColor: 'var(--border-hairline)', background: 'var(--bg-raised)', color: 'var(--text-muted)' }}
+            >
+              [ photo here ]
+            </div>
           </SlideSection>
         </div>
 

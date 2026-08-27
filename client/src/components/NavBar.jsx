@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { Menu, X } from 'lucide-react'
 import { DarkModeToggle } from './DarkModeToggle'
 
 const links = [
@@ -12,26 +13,41 @@ const links = [
 
 function navLinkClass({ isActive }) {
   return isActive
-    ? 'text-purple-400 font-medium'
-    : 'text-gray-400 hover:text-white transition-colors duration-150'
+    ? 'font-medium'
+    : 'transition-colors duration-150'
 }
 
 export function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    <nav className="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
+    <nav
+      className="sticky top-0 z-50 backdrop-blur-sm border-b"
+      style={{ background: 'rgba(11,11,15,0.95)', borderColor: 'var(--border-hairline)' }}
+    >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
 
         {/* Logo */}
-        <NavLink to="/" className="text-white font-semibold text-base tracking-tight">
+        <NavLink
+          to="/"
+          className="font-mono-label text-xs"
+          style={{ color: 'var(--text-primary)' }}
+        >
           Johnny Tran
         </NavLink>
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-7">
+        <div className="hidden md:flex items-center gap-7 font-mono-label text-xs">
           {links.map(({ to, label }) => (
-            <NavLink key={to} to={to} className={navLinkClass} end={to === '/'}>
+            <NavLink
+              key={to}
+              to={to}
+              className={navLinkClass}
+              end={to === '/'}
+              style={({ isActive }) => ({
+                color: isActive ? 'var(--accent-dev)' : 'var(--text-muted)',
+              })}
+            >
               {label}
             </NavLink>
           ))}
@@ -44,26 +60,29 @@ export function NavBar() {
           <button
             onClick={() => setMenuOpen(prev => !prev)}
             aria-label="Toggle menu"
-            className="p-2 text-gray-400 hover:text-white transition-colors"
+            className="p-2 transition-colors"
+            style={{ color: 'var(--text-muted)' }}
           >
-            {menuOpen ? '✕' : '☰'}
+            {menuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </div>
 
       {/* Mobile dropdown */}
       {menuOpen && (
-        <div className="md:hidden border-t border-gray-800 bg-gray-900 pb-2">
+        <div
+          className="md:hidden border-t pb-2 font-mono-label text-xs"
+          style={{ borderColor: 'var(--border-hairline)', background: 'var(--bg)' }}
+        >
           {links.map(({ to, label }) => (
             <NavLink
               key={to}
               to={to}
               end={to === '/'}
-              className={({ isActive }) =>
-                `block px-5 py-3 text-sm ${
-                  isActive ? 'text-purple-400 font-medium' : 'text-gray-400 hover:text-white'
-                } transition-colors`
-              }
+              className="block px-5 py-3 transition-colors"
+              style={({ isActive }) => ({
+                color: isActive ? 'var(--accent-dev)' : 'var(--text-muted)',
+              })}
               onClick={() => setMenuOpen(false)}
             >
               {label}

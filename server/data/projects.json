@@ -11,8 +11,29 @@
     "imageUrl": "https://assets.ppy.sh/media/osu-logo-white-2x.png",
     "bgImage": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&q=80",
     "themeColor": "#FF66AA",
-    "stats": { "live": true, "type": "osu" },
+    "stats": {
+      "live": true,
+      "type": "osu"
+    },
     "rankBadge": "https://osu.ppy.sh/images/badges/supporter-2.png",
+    "characterImage": null
+  },
+  {
+    "id": "draftout",
+    "title": "Draftout",
+    "description": "Ranked 1v1 Minecraft lockout gamemode. Draft goals to a 5x5 board, race to 13 first. Live ELO tracked.",
+    "category": "Games",
+    "subcategory": "Minecraft",
+    "techStack": [],
+    "repoUrl": null,
+    "liveUrl": "https://draftoutmc.com",
+    "imageUrl": null,
+    "bgImage": null,
+    "themeColor": "#22D3EE",
+    "stats": {
+      "live": true,
+      "type": "draftout"
+    },
     "characterImage": null
   },
   {
@@ -27,7 +48,11 @@
     "imageUrl": "https://images.contentstack.io/v3/assets/bltb6530b271fddd0b1/blt3f072336e3f3ade4/63096d7be4a8c30e088e7720/Valorant_2022_E5A2_PlayVALORANT_ContentStackThumbnail_1200x625_MB01.jpg",
     "bgImage": "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&q=80",
     "themeColor": "#FF4655",
-    "stats": { "live": false, "label": "Tag", "value": "TfxNexus#6969" },
+    "stats": {
+      "live": false,
+      "label": "Tag",
+      "value": "TfxNexus#6969"
+    },
     "rankBadge": "https://media.valorant-api.com/competitivetiers/03621f52-342b-cf4e-4f86-9350a49c6d04/24/largeicon.png",
     "rankLabel": "Peak Rank",
     "characterImage": null
@@ -35,7 +60,7 @@
   {
     "id": "fortnite",
     "title": "Fortnite",
-    "description": "Battle royale with building mechanics. Reached Unreal rank — the highest rank in competitive.",
+    "description": "Battle royale with building mechanics. Reached Unreal rank \u2014 the highest rank in competitive.",
     "category": "Games",
     "subcategory": "Battle Royale",
     "techStack": [],
@@ -44,7 +69,11 @@
     "imageUrl": "https://cdn2.unrealengine.com/fortnite-chapter-4-season-4-key-art-1920x1080-d0e5e3b7c0b0.jpg",
     "bgImage": "https://images.unsplash.com/photo-1589241062272-c0a000072dfa?w=600&q=80",
     "themeColor": "#00D4FF",
-    "stats": { "live": false, "label": "Peak Rank", "value": "Unreal" },
+    "stats": {
+      "live": false,
+      "label": "Peak Rank",
+      "value": "Unreal"
+    },
     "rankBadge": "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=200&q=80",
     "rankLabel": "Unreal",
     "characterImage": null
@@ -61,7 +90,11 @@
     "imageUrl": "https://images.unsplash.com/photo-1614680376408-81e91ffe3db7?w=600&q=80",
     "bgImage": "https://images.unsplash.com/photo-1614680376408-81e91ffe3db7?w=600&q=80",
     "themeColor": "#4A90D9",
-    "stats": { "live": false, "label": "AR Level", "value": "60" },
+    "stats": {
+      "live": false,
+      "label": "AR Level",
+      "value": "60"
+    },
     "characterImage": "https://rerollcdn.com/GENSHIN/Characters/Columbina.png",
     "characterName": "Columbina"
   },
@@ -77,7 +110,11 @@
     "imageUrl": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=600&q=80",
     "bgImage": "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=600&q=80",
     "themeColor": "#A78BFA",
-    "stats": { "live": false, "label": "Equilibrium", "value": "Level 70" },
+    "stats": {
+      "live": false,
+      "label": "Equilibrium",
+      "value": "Level 70"
+    },
     "characterImage": "https://rerollcdn.com/STARRAIL/Characters/Firefly.png",
     "characterName": "Firefly (Evernight)"
   },
@@ -93,7 +130,11 @@
     "imageUrl": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&q=80",
     "bgImage": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&q=80",
     "themeColor": "#F59E0B",
-    "stats": { "live": false, "label": "Inter-Knot Level", "value": "60" },
+    "stats": {
+      "live": false,
+      "label": "Inter-Knot Level",
+      "value": "60"
+    },
     "characterImage": "https://rerollcdn.com/ZZZ/Characters/Miyabi.png",
     "characterName": "Miyabi"
   },
@@ -109,7 +150,11 @@
     "imageUrl": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80",
     "bgImage": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80",
     "themeColor": "#10B981",
-    "stats": { "live": false, "label": "Level", "value": "59" },
+    "stats": {
+      "live": false,
+      "label": "Level",
+      "value": "59"
+    },
     "characterImage": "https://rerollcdn.com/ARKNIGHTS/Operators/Perlica.png",
     "characterName": "Perlica"
   },
@@ -125,7 +170,11 @@
     "imageUrl": "https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=600&q=80",
     "bgImage": "https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=600&q=80",
     "themeColor": "#3B82F6",
-    "stats": { "live": true, "type": "clashroyale", "tag": "#8GC8LR2C" },
+    "stats": {
+      "live": true,
+      "type": "clashroyale",
+      "tag": "#8GC8LR2C"
+    },
     "characterImage": null
   },
   {
@@ -140,7 +189,11 @@
     "imageUrl": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&q=80",
     "bgImage": "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&q=80",
     "themeColor": "#F97316",
-    "stats": { "live": true, "type": "clashofclans", "tag": "#89LC00PL8" },
+    "stats": {
+      "live": true,
+      "type": "clashofclans",
+      "tag": "#89LC00PL8"
+    },
     "characterImage": null
   },
   {
@@ -155,7 +208,11 @@
     "imageUrl": "https://images.unsplash.com/photo-1607513746994-51f730a44832?w=600&q=80",
     "bgImage": "https://images.unsplash.com/photo-1607513746994-51f730a44832?w=600&q=80",
     "themeColor": "#84CC16",
-    "stats": { "live": false, "label": "Ranked PB", "value": "13:41 (Gold II)" },
+    "stats": {
+      "live": false,
+      "label": "Ranked PB",
+      "value": "13:41 (Gold II)"
+    },
     "characterImage": null
   },
   {
@@ -170,7 +227,10 @@
     "imageUrl": "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=600&q=80",
     "bgImage": "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=600&q=80",
     "themeColor": "#D4AF37",
-    "stats": { "live": true, "type": "chess" },
+    "stats": {
+      "live": true,
+      "type": "chess"
+    },
     "characterImage": null
   },
   {
@@ -185,7 +245,10 @@
     "imageUrl": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=600&q=80",
     "bgImage": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=600&q=80",
     "themeColor": "#FF0000",
-    "stats": { "live": true, "type": "youtube" },
+    "stats": {
+      "live": true,
+      "type": "youtube"
+    },
     "characterImage": null
   },
   {
@@ -194,7 +257,10 @@
     "description": "My original personal portfolio built with plain HTML and CSS.",
     "category": "Personal Projects",
     "subcategory": "Web",
-    "techStack": ["HTML", "CSS"],
+    "techStack": [
+      "HTML",
+      "CSS"
+    ],
     "repoUrl": "https://github.com/TfxNexus",
     "liveUrl": null,
     "imageUrl": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&q=80",
@@ -209,7 +275,10 @@
     "description": "Backend database project built during an internship. Tables, views, and frontend connection.",
     "category": "Personal Projects",
     "subcategory": "Backend",
-    "techStack": ["SQL", "Java"],
+    "techStack": [
+      "SQL",
+      "Java"
+    ],
     "repoUrl": null,
     "liveUrl": null,
     "imageUrl": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?w=600&q=80",
@@ -224,7 +293,12 @@
     "description": "Full-stack React + Express portfolio with live API stats, dark mode, and animations.",
     "category": "Personal Projects",
     "subcategory": "Full Stack",
-    "techStack": ["React", "Express", "Tailwind CSS", "Framer Motion"],
+    "techStack": [
+      "React",
+      "Express",
+      "Tailwind CSS",
+      "Framer Motion"
+    ],
     "repoUrl": "https://github.com/TfxNexus",
     "liveUrl": "https://tfxnexus.vercel.app",
     "imageUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80",
@@ -239,7 +313,11 @@
     "description": "Building modern, responsive web apps with React, Tailwind, and full-stack patterns.",
     "category": "Interests",
     "subcategory": "Tech",
-    "techStack": ["React", "JavaScript", "Tailwind CSS"],
+    "techStack": [
+      "React",
+      "JavaScript",
+      "Tailwind CSS"
+    ],
     "repoUrl": null,
     "liveUrl": null,
     "imageUrl": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80",

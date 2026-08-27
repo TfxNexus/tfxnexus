@@ -1,23 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
 
 @variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Shared base */
+  --bg: #0B0B0F;
+  --bg-raised: #111116;
+  --border-hairline: #232228;
+  --border-hairline-strong: #2E2D33;
+  --text-primary: #E8E6E1;
+  --text-secondary: #A6A49C;
+  --text-muted: #6B6A66;
+
+  /* Dev register — precise, cold */
+  --accent-dev: #5B8CFF;
+  --accent-dev-dim: #5B8CFF33;
+
+  /* Gaming register — manga spot color */
+  --accent-game: #FF3357;
+  --accent-game-dim: #FF335733;
+  --accent-game-bg: #16121A;
+  --accent-game-border: #3A1620;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
 
 @layer base {
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
-    background-color: #111827;
-    color: #f3f4f6;
-  }
-
-  html.dark {
-    background-color: #111827;
-    color: #f3f4f6;
-  }
-
-  html:not(.dark) {
-    background-color: #f9fafb;
-    color: #111827;
+    background-color: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font-display);
   }
 
   body {
@@ -28,5 +44,31 @@
 
   #root {
     min-height: 100svh;
+  }
+
+  ::selection {
+    background: var(--accent-dev-dim);
+  }
+}
+
+@layer utilities {
+  .font-mono-label {
+    font-family: var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Manga-panel clipped corner, used only in the gaming register */
+  .panel-clip {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%);
+  }
+
+  .panel-clip-sm {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  }
+
+  .halftone-bg {
+    background-image: radial-gradient(circle, #2A0F17 1px, transparent 1px);
+    background-size: 14px 14px;
   }
 }
