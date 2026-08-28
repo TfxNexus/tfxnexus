@@ -1,6 +1,63 @@
 import { Router } from 'express'
+import * as cheerio from 'cheerio'
 
 const router = Router()
+
+// Draftout — no public JSON API, so we scrape the rendered player page.
+// Cache for 10 minutes so we're not hammering their server on every visit.
+const draftoutCache = new Map() // username -> { data, expires }
+const DRAFTOUT_TTL_MS = 10 * 60 * 1000
+
+router.get('/stats/draftout', async (req, res) => {
+  const username = process.env.DRAFTOUT_USERNAME
+  if (!username) {
+    return res.status(400).json({ error: 'DRAFTOUT_USERNAME not configured' })
+  }
+
+  const cached = draftoutCache.get(username)
+  if (cached && cached.expires > Date.now()) {
+    return res.json(cached.data)
+  }
+
+  try {
+    const url = `https://draftoutmc.com/leaderboard/${encodeURIComponent(username)}?metric=elo&filter=competitive`
+    const r = await fetch(url, { headers: { 'User-Agent': 'portfolio-site/1.0' } })
+    if (!r.ok) throw new Error(`Draftout ${r.status}`)
+    const html = await r.text()
+    const $ = cheerio.load(html)
+    const text = $('body').text()
+
+    // The rendered page has no stable class hooks, so we pattern-match the
+    // label/value pairs that always appear together on a player's stat block.
+    // If Draftout changes their markup this will need updating.
+    const eloMatch = text.match(/(\d{3,4})Peak ELO/)
+    const winRateMatch = text.match(/([\d.]+)%Win Rate/)
+    const streakMatch = text.match(/(\d+)Best Streak/)
+    const diffMatch = text.match(/([\d.-]+)Goal Diff/)
+    const avgFinishMatch = text.match(/([\d:]+)Avg\. Finish/)
+    const pbMatch = text.match(/([\d:]+)PB/)
+    const forfeitMatch = text.match(/([\d.]+)%Forfeit Rate/)
+    const matchesMatch = text.match(/(\d+) matches/)
+
+    const data = {
+      username,
+      elo: eloMatch ? parseInt(eloMatch[1]) : null,
+      winRate: winRateMatch ? parseFloat(winRateMatch[1]) : null,
+      bestStreak: streakMatch ? parseInt(streakMatch[1]) : null,
+      goalDiff: diffMatch ? parseFloat(diffMatch[1]) : null,
+      avgFinish: avgFinishMatch ? avgFinishMatch[1] : null,
+      personalBest: pbMatch ? pbMatch[1] : null,
+      forfeitRate: forfeitMatch ? parseFloat(forfeitMatch[1]) : null,
+      matchesPlayed: matchesMatch ? parseInt(matchesMatch[1]) : null,
+    }
+
+    draftoutCache.set(username, { data, expires: Date.now() + DRAFTOUT_TTL_MS })
+    res.json(data)
+  } catch (e) {
+    console.error('draftout stats error:', e.message)
+    res.status(500).json({ error: 'Failed to fetch Draftout stats' })
+  }
+})
 
 // osu! — API v2 with client credentials OAuth
 // Needs OSU_CLIENT_ID and OSU_CLIENT_SECRET from https://osu.ppy.sh/home/account/edit (OAuth section)
