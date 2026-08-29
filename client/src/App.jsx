@@ -1,6 +1,7 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { NavBar } from './components/NavBar'
 import { LeftSidebar, RightSidebar } from './components/PageSidebar'
+import { Footer } from './components/Footer'
 import { HomePage } from './pages/HomePage'
 import { AboutPage } from './pages/AboutPage'
 import { ProjectsPage } from './pages/ProjectsPage'
@@ -13,9 +14,9 @@ export default function App() {
   const isHome = pathname === '/'
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--bg)', color: 'var(--text-primary)' }}>
+    <div className="min-h-screen flex flex-col" style={{ background: 'var(--bg)', color: 'var(--text-primary)' }}>
       <NavBar />
-      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 xl:px-8">
+      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 xl:px-8 flex-1 w-full">
         <div className="flex gap-6 xl:gap-8 py-0">
           {!isHome && <LeftSidebar />}
           <main className="flex-1 min-w-0">
@@ -31,6 +32,7 @@ export default function App() {
           {!isHome && <RightSidebar />}
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

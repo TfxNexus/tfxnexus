@@ -57,7 +57,7 @@ export function HomePage() {
         className="relative overflow-hidden mb-16 border-b"
         style={{ borderColor: 'var(--border-hairline)' }}
       >
-        <div className="relative z-10 px-4 sm:px-8 py-20 sm:py-28">
+        <div className="relative z-10 px-4 sm:px-8 py-20 sm:py-28 max-w-5xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: 'easeOut' }}>
             <p className="font-mono-label text-xs mb-3" style={{ color: 'var(--accent-dev)' }}>
@@ -106,7 +106,7 @@ export function HomePage() {
       </section>
 
       {/* Quick facts — spec-sheet style */}
-      <section id="facts" className="px-4 sm:px-0 mb-20">
+      <section id="facts" className="px-4 sm:px-0 mb-20 max-w-5xl mx-auto">
         <div
           className="grid grid-cols-2 sm:grid-cols-3 gap-px"
           style={{ background: 'var(--border-hairline)', border: '1px solid var(--border-hairline)' }}
@@ -129,7 +129,7 @@ export function HomePage() {
       </section>
 
       {/* Story sections */}
-      <div className="space-y-24 px-4 sm:px-0 pb-24">
+      <div className="space-y-24 px-4 sm:px-0 pb-24 max-w-5xl mx-auto">
 
         {/* 1: Origin */}
         <div id="origin" className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
