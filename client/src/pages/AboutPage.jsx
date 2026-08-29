@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { GraduationCap, Wrench, Mail, Github, Code2, Palette, Zap, Coffee, Database } from 'lucide-react'
+import { GraduationCap, Wrench, Mail, Terminal, Code2, Palette, Zap, Coffee, Database } from 'lucide-react'
 import { useFetch } from '../hooks/useFetch'
 import { API_BASE } from '../lib/apiBase'
 import { AnimatedPage } from '../components/AnimatedPage'
@@ -124,7 +124,7 @@ export function AboutPage() {
               className="flex items-center gap-4 px-5 py-4 transition-colors group"
               style={{ background: 'var(--bg-raised)' }}
             >
-              <Github size={20} strokeWidth={1.5} style={{ color: 'var(--text-muted)' }} />
+              <Terminal size={20} strokeWidth={1.5} style={{ color: 'var(--text-muted)' }} />
               <div>
                 <p className="font-mono-label text-xs mb-0.5" style={{ color: 'var(--text-muted)' }}>GitHub</p>
                 <p className="text-sm transition-colors" style={{ color: 'var(--accent-dev)' }}>

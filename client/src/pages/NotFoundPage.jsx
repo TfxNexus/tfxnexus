@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom'
 export function NotFoundPage() {
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-32 text-center">
-      <p className="text-purple-400 text-sm font-medium tracking-widest uppercase mb-3">Error</p>
-      <h1 className="text-7xl font-bold text-white mb-4">404</h1>
-      <p className="text-gray-400 text-lg mb-8">This page doesn't exist.</p>
+      <p className="font-mono-label text-xs mb-3" style={{ color: 'var(--accent-dev)' }}>{'// error'}</p>
+      <h1 className="text-7xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>404</h1>
+      <p className="text-lg mb-8" style={{ color: 'var(--text-secondary)' }}>This page doesn't exist.</p>
       <Link
         to="/"
-        className="px-6 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-lg
-                   font-medium text-sm transition-colors duration-150"
+        className="inline-block px-6 py-3 font-mono-label text-xs transition-colors duration-150"
+        style={{ background: 'var(--accent-dev)', color: '#0B0B0F' }}
       >
-        Back to Home
+        Back to home
       </Link>
     </div>
   )

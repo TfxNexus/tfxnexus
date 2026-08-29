@@ -1,7 +1,9 @@
 export function SkillTag({ skill }) {
   return (
-    <span className="inline-block px-2.5 py-0.5 text-xs font-medium rounded-full
-                     bg-purple-900/50 text-purple-300 border border-purple-700/40">
+    <span
+      className="inline-block px-2.5 py-0.5 font-mono-label text-xs border rounded-sm"
+      style={{ color: 'var(--accent-dev)', borderColor: 'var(--accent-dev-dim)', background: 'rgba(91,140,255,0.06)' }}
+    >
       {skill}
     </span>
   )
