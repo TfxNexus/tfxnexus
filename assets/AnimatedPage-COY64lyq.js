@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-C7M7YA1l.js";import{t}from"./proxy-Curr0Eqs.js";var n=e(),r=typeof window<`u`&&window.matchMedia(`(prefers-reduced-motion: reduce)`).matches;function i({children:e}){return r?(0,n.jsx)(`div`,{children:e}):(0,n.jsx)(t.div,{initial:{opacity:0,y:16},animate:{opacity:1,y:0},transition:{duration:.35,ease:`easeOut`},children:e})}export{i as t};

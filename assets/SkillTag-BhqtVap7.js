@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-C7M7YA1l.js";var t=e();function n({skill:e}){return(0,t.jsx)(`span`,{className:`inline-block px-2.5 py-0.5 font-mono-label text-xs border rounded-sm`,style:{color:`var(--accent-dev)`,borderColor:`var(--accent-dev-dim)`,background:`rgba(91,140,255,0.06)`},children:e})}export{n as t};
