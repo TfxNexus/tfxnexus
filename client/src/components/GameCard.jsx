@@ -14,8 +14,8 @@ function LiveBadge() {
 
 function OsuStats() {
   const { data, loading, error } = useFetch(`${API_BASE}/api/stats/osu`)
-  if (loading) return <p className="text-xs text-gray-500">Loading...</p>
-  if (error || !data) return <p className="text-xs text-gray-500">Stats unavailable</p>
+  if (loading) return <p className="text-xs" style={{ color: '#8A7580' }}>Loading...</p>
+  if (error || !data) return <p className="text-xs" style={{ color: '#8A7580' }}>Stats unavailable</p>
   return (
     <div className="grid grid-cols-2 gap-1.5 mt-2">
       <Stat label="Global Rank" value={`#${data.rank?.toLocaleString()}`} />
@@ -41,8 +41,8 @@ function DraftoutStats() {
 
 function ChessStats() {
   const { data, loading, error } = useFetch(`${API_BASE}/api/stats/chess`)
-  if (loading) return <p className="text-xs text-gray-500">Loading...</p>
-  if (error || !data) return <p className="text-xs text-gray-500">Stats unavailable</p>
+  if (loading) return <p className="text-xs" style={{ color: '#8A7580' }}>Loading...</p>
+  if (error || !data) return <p className="text-xs" style={{ color: '#8A7580' }}>Stats unavailable</p>
   return (
     <div className="grid grid-cols-3 gap-1.5 mt-2">
       {data.rapid && <Stat label="Rapid" value={data.rapid} />}
@@ -54,8 +54,8 @@ function ChessStats() {
 
 function ClashRoyaleStats() {
   const { data, loading, error } = useFetch(`${API_BASE}/api/stats/clashroyale`)
-  if (loading) return <p className="text-xs text-gray-500">Loading...</p>
-  if (error || !data) return <p className="text-xs text-gray-500">Stats unavailable</p>
+  if (loading) return <p className="text-xs" style={{ color: '#8A7580' }}>Loading...</p>
+  if (error || !data) return <p className="text-xs" style={{ color: '#8A7580' }}>Stats unavailable</p>
   return (
     <div className="grid grid-cols-2 gap-1.5 mt-2">
       <Stat label="Trophies" value={data.trophies?.toLocaleString()} />
@@ -68,8 +68,8 @@ function ClashRoyaleStats() {
 
 function ClashOfClansStats() {
   const { data, loading, error } = useFetch(`${API_BASE}/api/stats/clashofclans`)
-  if (loading) return <p className="text-xs text-gray-500">Loading...</p>
-  if (error || !data) return <p className="text-xs text-gray-500">Stats unavailable</p>
+  if (loading) return <p className="text-xs" style={{ color: '#8A7580' }}>Loading...</p>
+  if (error || !data) return <p className="text-xs" style={{ color: '#8A7580' }}>Stats unavailable</p>
   return (
     <div className="grid grid-cols-2 gap-1.5 mt-2">
       <Stat label="Town Hall" value={`TH${data.townHallLevel}`} />
@@ -82,8 +82,8 @@ function ClashOfClansStats() {
 
 function YouTubeStats() {
   const { data, loading, error } = useFetch(`${API_BASE}/api/stats/youtube`)
-  if (loading) return <p className="text-xs text-gray-500">Loading...</p>
-  if (error || !data) return <p className="text-xs text-gray-500">Stats unavailable</p>
+  if (loading) return <p className="text-xs" style={{ color: '#8A7580' }}>Loading...</p>
+  if (error || !data) return <p className="text-xs" style={{ color: '#8A7580' }}>Stats unavailable</p>
   return (
     <div className="grid grid-cols-3 gap-1.5 mt-2">
       <Stat label="Subscribers" value={data.subscribers >= 1000 ? `${(data.subscribers/1000).toFixed(1)}K` : data.subscribers} />
